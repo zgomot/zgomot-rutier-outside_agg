@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zgomot rutier (outside agglomerations)</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        body { margin:0; }
+        #map { height: 100vh; }
+
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .legend {
+            background: white;
+            padding: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <b>Indicator:</b><br>
+    <select id="layerSelect">
+        <option value="lden">Lden</option>
+        <option value="lnight">Lnight</option>
+    </select>
+</div>
+
+<div id="map"></div>
+
+<script>
+var map = L.map('map').setView([45.8, 24.9], 7);
+
+// Basemap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+// WMS
+var wmsUrl = "https://geonoise.mmap.ro/ows/services/org.3.1bddf4a2-83b0-4599-9851-44be4419a975_wms";
+
+// Layere
+var lden = L.tileLayer.wms(wmsUrl, {
+    layers: 'NoiseContours_majorRoadsIncludingAgglomeration_Lden',
+    format: 'image/png',
+    transparent: true
+});
+
+var lnight = L.tileLayer.wms(wmsUrl, {
+    layers: 'NoiseContours_majorRoadsIncludingAgglomeration_Lnight',
+    format: 'image/png',
+    transparent: true
+});
+
+// default
+lden.addTo(map);
+
+// selector
+document.getElementById("layerSelect").addEventListener("change", function() {
+    map.removeLayer(lden);
+    map.removeLayer(lnight);
+
+    if (this.value === "lden") {
+        lden.addTo(map);
+    } else {
+        lnight.addTo(map);
+    }
+});
+
+// legendă (corectă pentru contururi)
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function () {
+    var div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = `
+        <b>Legendă</b><br>
+        <div style="display:flex; align-items:center;">
+            <div style="width:25px;height:2px;background:black;margin-right:5px;"></div>
+            Contur zgomot
+        </div>
+        Lden – zi-seară-noapte<br>
+        Lnight – noapte
+    `;
+    return div;
+};
+
+legend.addTo(map);
+
+</script>
+
+</body>
+</html>
