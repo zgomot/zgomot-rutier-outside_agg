@@ -55,7 +55,7 @@ var wmsUrl = "https://geonoise.mmap.ro/ows/services/org.3.1bddf4a2-83b0-4599-985
 // Lden
 var lden = L.tileLayer.wms(wmsUrl, {
     layers: 'NoiseContours_majorRoadsIncludingAgglomeration_Lden',
-    styles: '',
+    styles: 'NoiseContours',
     format: 'image/png',
     transparent: true,
     opacity: 0.8
@@ -64,7 +64,7 @@ var lden = L.tileLayer.wms(wmsUrl, {
 // Lnight
 var lnight = L.tileLayer.wms(wmsUrl, {
     layers: 'NoiseContours_majorRoadsIncludingAgglomeration_Lnight',
-    styles: '',
+    styles: 'NoiseContours',
     format: 'image/png',
     transparent: true,
     opacity: 0.8
@@ -73,7 +73,7 @@ var lnight = L.tileLayer.wms(wmsUrl, {
 // default
 lden.addTo(map);
 
-// selector vizibil
+// selector
 document.getElementById("layerSelect").addEventListener("change", function() {
     map.removeLayer(lden);
     map.removeLayer(lnight);
