@@ -1,5 +1,5 @@
 # zgomot-rutier-outside_agg
-ărți de zgomot rutier în afara aglomerărilor din România
+Hărți de zgomot rutier în afara aglomerărilor din România
 
 Acest proiect oferă o vizualizare web a hărților strategice de zgomot pentru drumurile principale din România, în afara aglomerărilor urbane, realizate conform Directivei 2002/49/CE privind evaluarea și gestionarea zgomotului ambiental.
 
