@@ -26,6 +26,8 @@
             background: white;
             padding: 10px;
             line-height: 1.5;
+            max-height: 300px;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -42,7 +44,7 @@
 <div id="map"></div>
 
 <script>
-var map = L.map('map').setView([45.8, 24.9], 7);
+var map = L.map('map').setView([44.5, 26.1], 10);
 
 // Basemap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -89,20 +91,39 @@ document.getElementById("layerSelect").addEventListener("change", function() {
     }
 });
 
-// legendă
+// legendă reală GeoNoise
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function () {
     var div = L.DomUtil.create('div', 'legend');
+
     div.innerHTML = `
-        <b>Legendă</b><br>
-        <div style="display:flex; align-items:center;">
-            <div style="width:25px;height:2px;background:black;margin-right:5px;"></div>
-            Contur zgomot
-        </div>
-        Lden – zi-seară-noapte<br>
-        Lnight – noapte
+    <b>Legendă zgomot (dB)</b><br><br>
+
+    <b>Lden</b><br>
+    <div style="background:#006837;padding:3px;color:white;">&lt; 40 dB</div>
+    <div style="background:#31a354;padding:3px;">40–44 dB</div>
+    <div style="background:#78c679;padding:3px;">45–49 dB</div>
+    <div style="background:#c2e699;padding:3px;">50–54 dB</div>
+    <div style="background:#fed976;padding:3px;">55–59 dB</div>
+    <div style="background:#fd8d3c;padding:3px;">60–64 dB</div>
+    <div style="background:#f03b20;padding:3px;color:white;">65–69 dB</div>
+    <div style="background:#bd0026;padding:3px;color:white;">70–74 dB</div>
+    <div style="background:#800026;padding:3px;color:white;">&gt; 75 dB</div>
+
+    <br>
+
+    <b>Lnight</b><br>
+    <div style="background:#006837;padding:3px;color:white;">&lt; 40 dB</div>
+    <div style="background:#31a354;padding:3px;">40–44 dB</div>
+    <div style="background:#78c679;padding:3px;">45–49 dB</div>
+    <div style="background:#c2e699;padding:3px;">50–54 dB</div>
+    <div style="background:#fed976;padding:3px;">55–59 dB</div>
+    <div style="background:#fd8d3c;padding:3px;">60–64 dB</div>
+    <div style="background:#f03b20;padding:3px;color:white;">65–69 dB</div>
+    <div style="background:#bd0026;padding:3px;color:white;">&gt; 70 dB</div>
     `;
+
     return div;
 };
 
