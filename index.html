@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Zgomot rutier (outside agglomerations)</title>
+    <title>Zgomot rutier – outside aglomerări</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -49,7 +49,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
 }).addTo(map);
 
-// WMS
+// WMS URL (IMPORTANT: fără GetCapabilities)
 var wmsUrl = "https://geonoise.mmap.ro/ows/services/org.3.1bddf4a2-83b0-4599-9851-44be4419a975_wms";
 
 // Layere
@@ -65,10 +65,10 @@ var lnight = L.tileLayer.wms(wmsUrl, {
     transparent: true
 });
 
-// default
+// Default
 lden.addTo(map);
 
-// selector
+// Selector vizibil
 document.getElementById("layerSelect").addEventListener("change", function() {
     map.removeLayer(lden);
     map.removeLayer(lnight);
@@ -80,7 +80,7 @@ document.getElementById("layerSelect").addEventListener("change", function() {
     }
 });
 
-// legendă (corectă pentru contururi)
+// Legendă (corectă pentru contururi)
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function () {
