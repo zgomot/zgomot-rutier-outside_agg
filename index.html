@@ -49,26 +49,31 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
 }).addTo(map);
 
-// WMS URL (IMPORTANT: fără GetCapabilities)
+// WMS URL
 var wmsUrl = "https://geonoise.mmap.ro/ows/services/org.3.1bddf4a2-83b0-4599-9851-44be4419a975_wms";
 
-// Layere
+// Lden
 var lden = L.tileLayer.wms(wmsUrl, {
     layers: 'NoiseContours_majorRoadsIncludingAgglomeration_Lden',
+    styles: '',
     format: 'image/png',
-    transparent: true
+    transparent: true,
+    opacity: 0.8
 });
 
+// Lnight
 var lnight = L.tileLayer.wms(wmsUrl, {
     layers: 'NoiseContours_majorRoadsIncludingAgglomeration_Lnight',
+    styles: '',
     format: 'image/png',
-    transparent: true
+    transparent: true,
+    opacity: 0.8
 });
 
-// Default
+// default
 lden.addTo(map);
 
-// Selector vizibil
+// selector vizibil
 document.getElementById("layerSelect").addEventListener("change", function() {
     map.removeLayer(lden);
     map.removeLayer(lnight);
@@ -80,7 +85,7 @@ document.getElementById("layerSelect").addEventListener("change", function() {
     }
 });
 
-// Legendă (corectă pentru contururi)
+// legendă
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function () {
